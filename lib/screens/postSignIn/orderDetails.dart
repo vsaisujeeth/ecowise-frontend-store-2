@@ -1,12 +1,13 @@
 
 
+import 'package:ecowise_vendor_v2/UI/buttons.dart';
 import 'package:ecowise_vendor_v2/UI/snackBar.dart';
 import 'package:ecowise_vendor_v2/Utils/constants.dart';
 import 'package:ecowise_vendor_v2/services/apiServices.dart';
 import 'package:flutter/material.dart';
-import 'package:progress_indicators/progress_indicators.dart';
+//import 'package:progress_indicators/progress_indicators.dart';
 import 'package:provider/provider.dart';
-import 'package:slider_button/slider_button.dart';
+//import 'package:slider_button/slider_button.dart';
 
 class OrderDetails extends StatefulWidget {
   var order;
@@ -188,39 +189,49 @@ class _OrderDetailsState extends State<OrderDetails> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         (approvingProvider.approvingOrder)?
-                        JumpingDotsProgressIndicator(numberOfDots: 3,):
-                        SliderButton(
-                          action: () async{
-                            bool isApproved = await approvingProvider.approveOrder(storeConstants.token,
-                                order['_id'], order['expected_points']);
-
-                            if(isApproved){
-                              snackBar(context,"Order Completed temporarily!!", Colors.green);
-                              Navigator.pop(context,true);
-                            }else{
-                              snackBar(context, "An Error Occurred!!", Colors.red);
-                            }
-                          },
-                          label: const Text(
-                            "Slide to Approve the Order",
-                            style: TextStyle(
-                                color: Color(0xff4a4a4a),
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16),
-                          ),
-                          icon: const Center(
-                              child: Icon(
-                                Icons.arrow_forward,
-                                color: Colors.white,
-                                size: 25.0,
-                              )),
-                          shimmer: true,
-                          radius: 20,
-                          width: 280,
-                          buttonSize: 60,
-                          buttonColor: AppTheme().primaryColor,
-                          backgroundColor: AppTheme().backgroundColor,
-                        )
+                        CircularProgressIndicator(color: AppTheme().primaryColor,):
+                           loadingButton(context, ()async{
+                             bool isApproved = await approvingProvider.approveOrder(storeConstants.token,
+                                 order['_id'], order['expected_points']);
+                             if(isApproved){
+                               snackBar(context,"Order Completed temporarily!!", Colors.green);
+                               Navigator.pop(context,true);
+                             }else{
+                               snackBar(context, "An Error Occurred!!", Colors.red);
+                             }
+                           }, Text("Approve Order"))
+                        // SliderButton(
+                        //   action: () async{
+                        //     bool isApproved = await approvingProvider.approveOrder(storeConstants.token,
+                        //         order['_id'], order['expected_points']);
+                        //
+                        //     if(isApproved){
+                        //       snackBar(context,"Order Completed temporarily!!", Colors.green);
+                        //       Navigator.pop(context,true);
+                        //     }else{
+                        //       snackBar(context, "An Error Occurred!!", Colors.red);
+                        //     }
+                        //   },
+                        //   label: const Text(
+                        //     "Slide to Approve the Order",
+                        //     style: TextStyle(
+                        //         color: Color(0xff4a4a4a),
+                        //         fontWeight: FontWeight.w500,
+                        //         fontSize: 16),
+                        //   ),
+                        //   icon: const Center(
+                        //       child: Icon(
+                        //         Icons.arrow_forward,
+                        //         color: Colors.white,
+                        //         size: 25.0,
+                        //       )),
+                        //   shimmer: true,
+                        //   radius: 20,
+                        //   width: 280,
+                        //   buttonSize: 60,
+                        //   buttonColor: AppTheme().primaryColor,
+                        //   backgroundColor: AppTheme().backgroundColor,
+                        // )
                       ],
                     );
                   }
