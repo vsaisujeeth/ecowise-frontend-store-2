@@ -4,6 +4,7 @@ import 'package:ecowise_vendor_v2/UI/buttons.dart';
 import 'package:ecowise_vendor_v2/UI/snackBar.dart';
 import 'package:ecowise_vendor_v2/Utils/constants.dart';
 import 'package:ecowise_vendor_v2/screens/authScreens/signUp.dart';
+import 'package:ecowise_vendor_v2/screens/postSignIn/pageManager.dart';
 import 'package:ecowise_vendor_v2/services/apiServices.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -131,10 +132,10 @@ class _SignInPageState extends State<SignInPage> {
                     bool isLogin = await ApiServices().logIn(username.text, password.text);
                     if(isLogin){
                       snackBar(context, "Logged In Successfully!", Colors.green);
-                      // Navigator.of(context).pop();
-                      // Navigator.of(context).push(
-                      //     MaterialPageRoute(builder: (_)=>PageManager())
-                      // );
+                      Navigator.of(context).pop();
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (_)=>PageManager())
+                      );
                     } else {
                       setState(() {
                         loggingIn = false;

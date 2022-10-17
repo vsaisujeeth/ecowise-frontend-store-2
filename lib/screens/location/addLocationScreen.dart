@@ -3,6 +3,7 @@
 import 'package:ecowise_vendor_v2/UI/buttons.dart';
 import 'package:ecowise_vendor_v2/UI/snackBar.dart';
 import 'package:ecowise_vendor_v2/Utils/constants.dart';
+import 'package:ecowise_vendor_v2/screens/postSignIn/homeScreen.dart';
 import 'package:ecowise_vendor_v2/services/apiServices.dart';
 import 'package:ecowise_vendor_v2/services/locationServices.dart';
 import 'package:flutter/material.dart';
@@ -175,10 +176,10 @@ class _AddAddressState extends State<AddAddress> {
                       Navigator.pop(context);
                       Navigator.pop(context);
                       if(loggedIn){
-                        // Navigator.pop(context);
-                        // Navigator.of(context).push(
-                        //     MaterialPageRoute(builder: (_)=>HomeScreen())
-                        // );
+                        Navigator.pop(context);
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (_)=>HomeScreen())
+                        );
                       }else{
                         snackBar(context, "An Error Occurred!", Colors.red);
                       }
