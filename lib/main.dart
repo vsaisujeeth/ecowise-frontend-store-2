@@ -1,15 +1,17 @@
 import 'package:ecowise_vendor_v2/Utils/tabProvider.dart';
 import 'package:ecowise_vendor_v2/screens/authScreens/signIn.dart';
+import 'package:ecowise_vendor_v2/screens/postSignIn/homeScreen.dart';
+import 'package:ecowise_vendor_v2/screens/postSignIn/orderDetails.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
-     // ChangeNotifierProvider(create: (_) => orderProvider()),
-     // ChangeNotifierProvider(create: (_) => storeConfigs()),
+      ChangeNotifierProvider(create: (_) => orderProvider()),
+      //ChangeNotifierProvider(create: (_) => storeConfigs()),
      ChangeNotifierProvider(create: (_) => TabProvider()),
      //ChangeNotifierProvider(create: (_) => ProfileChangeProvider()),
-     //ChangeNotifierProvider(create: (_) => approving())
+     ChangeNotifierProvider(create: (_) => approving())
   ], child: MyApp()));
 
 }
